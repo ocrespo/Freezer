@@ -11,22 +11,26 @@
 #include <string>
 
 #include <functional>
-#include <list>
+#include <vector>
 
 class IObserver;
 
-using std::list;
+using std::vector;
 using std::function;
 using std::string;
+
+using void_func = function<void()>;
+using voidInt_func = function<void(int)>;
+
 
 class Subject {
 public:
 	Subject();
 	virtual ~Subject();
 
-	void registerUpdateStartProcess(function<void()> fn);
-	void registerUpdateProgression(function<void(int)> fn);
-	void registerUpdateEndProcess(function<void()> fn);
+	void registerUpdateStartProcess(void_func& fn);
+	void registerUpdateProgression(voidInt_func& fn);
+	void registerUpdateEndProcess(void_func& fn);
 
 
 protected:
@@ -37,9 +41,9 @@ protected:
 
 private:
 
-	list<function<void()>> startProcessCallback;
-	list<function<void(int)>> progressionCallback;
-	list<function<void()>> endProcessCallback;
+	vector<void_func> startProcessCallback;
+	vector<voidInt_func> progressionCallback;
+	vector<void_func> endProcessCallback;
 };
 
 #endif /* SRC_OBSERVER_SUBJECT_H_ */

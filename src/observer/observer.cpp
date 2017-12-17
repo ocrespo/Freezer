@@ -7,7 +7,7 @@
 
 #include "observer.h"
 
-IObserver::IObserver() : next_(nullptr){
+IObserver::IObserver() : next(nullptr){
 
 }
 

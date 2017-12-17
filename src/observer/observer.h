@@ -22,7 +22,7 @@ public:
 
 private:
 
-	IObserver* next_;
+	IObserver* next;
 
 };
 

@@ -9,9 +9,9 @@
 
 #include "observer.h"
 
-Subject::Subject() : startProcessCallback(),
-progressionCallback(),
-	endProcessCallback()
+Subject::Subject() : startProcessCallback(3),
+					progressionCallback(3),
+					endProcessCallback(3)
 {
 
 }
@@ -19,7 +19,7 @@ progressionCallback(),
 Subject::~Subject() {
 }
 
-void Subject::registerUpdateStartProcess(function<void()> fn){
+void Subject::registerUpdateStartProcess(void_func& fn){
 
 	startProcessCallback.push_back(fn);
 
@@ -34,7 +34,7 @@ void Subject::notifyStartProcess(){
 
 
 
-void Subject::registerUpdateProgression(function<void(int)> fn){
+void Subject::registerUpdateProgression(voidInt_func& fn){
 
 	progressionCallback.push_back(fn);
 
@@ -48,7 +48,7 @@ void Subject::notifyProgression(int value){
 }
 
 
-void Subject::registerUpdateEndProcess(function<void()> fn){
+void Subject::registerUpdateEndProcess(void_func& fn){
 
 	endProcessCallback.push_back(fn);
 
