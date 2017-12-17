@@ -31,7 +31,10 @@ endif()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    set(compilation "-O2 -g")
+    if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    	set(compilation "-g")
+    endif()
+    set(compilation "-O2 ${compilation}")
 endif()
 
 set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} ${warnings} ${compilation}")
@@ -45,10 +48,17 @@ configure_file (
   "${PROJECT_BINARY_DIR}/FreezerConfig.h"
   )
   
+  
 # add the binary tree to the search path for include files
 include_directories("${PROJECT_BINARY_DIR}")
 
-find_package(Qt5Widgets)
+set (CMAKE_INCLUDE_CURRENT_DIR ON)
+
+
+set (CMAKE_AUTOMOC ON)
+set (CMAKE_AUTOUIC ON)  
+
+find_package(Qt5Widgets REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -56,11 +66,6 @@ set (PROJECT_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 
 add_subdirectory(${PROJECT_SOURCE_DIR})
 
-
-#add_subdirectory(${PROJECT_SOURCE_DIR}/connection)
-
-
-#add_library(ConnectionManager STATIC ${PROJECT_SOURCE_DIR}/main.cpp)
 
 
 

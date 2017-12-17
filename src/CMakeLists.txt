@@ -1,25 +1,30 @@
-
-
-
-#set (Freezer_SOURCES ${LITERTP_HEADERS} liteRTP.h ) #Add .h here, just for standalone headers
-
 set (Freezer_SOURCES ${LITERTP_SOURCES} main.cpp)
 
 
-add_executable(Freezer ${Freezer_SOURCES})
+#Source
+       
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/model)
+        
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/observer)
 
-target_link_libraries(Freezer Qt5::Widgets)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/presenter)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/view)
+
+
+#Resource
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Resources)
+
+qt5_add_resources(Freezer_RESOURCES ${Freezer_RESOURCES} )
+
+
+add_executable(${PROJECT_NAME}  ${Freezer_SOURCES} ${Freezer_RESOURCES})
+
+target_link_libraries(${PROJECT_NAME}  Qt5::Widgets)
  
-install (TARGETS Freezer DESTINATION release/bin)
+install (TARGETS ${PROJECT_NAME}  DESTINATION ${CMAKE_BUILD_TYPE}//bin)
 
-################## TESTS ############################
-#add_executable(serverTest ServerTest.cpp)
-#target_link_libraries(serverTest ConnectionManager)
-#target_include_directories(serverTest PUBLIC release/include)
-
-#add_executable(clientTest ClientTest.cpp)
-#target_link_libraries(clientTest ConnectionManager)
-#target_include_directories(clientTest PUBLIC release/include)
 
 
 
