@@ -1,4 +1,10 @@
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/observer)
 
-set (Freezer_SOURCES ${Freezer_SOURCES} 
-                        ${CMAKE_CURRENT_SOURCE_DIR}/Model.cpp
-                        ) #Add .cpp here
+
+set (Model_SOURCES ${Model_SOURCES} 
+ 					Model.cpp)
+
+
+add_library(model STATIC ${Model_SOURCES}  
+						$<TARGET_OBJECTS:observer>
+						)

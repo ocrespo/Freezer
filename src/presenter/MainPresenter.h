@@ -15,14 +15,15 @@ class Model;
 class MainWindow;
 
 class MainPresenter: public QObject  {
+
+	Q_OBJECT
+
 public:
 	MainPresenter(MainWindow *mainView,Model *model);
 	virtual ~MainPresenter();
 
 private slots:
 	void run();
-	void InputFileClicked();
-	void OutputFileClicked();
 
 private:
 	MainWindow *mainView;

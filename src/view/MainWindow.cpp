@@ -27,3 +27,7 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+
+#include "moc_MainWindow.cpp"
+
+

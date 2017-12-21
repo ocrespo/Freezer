@@ -5,9 +5,8 @@
  *      Author: ocrespo
  */
 
-#include "subject.h"
+#include "Subject.h"
 
-#include "observer.h"
 
 Subject::Subject() : startProcessCallback(3),
 					progressionCallback(3),

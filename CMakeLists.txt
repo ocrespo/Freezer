@@ -62,6 +62,11 @@ find_package(Qt5Widgets REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
+
+set (PROJECT_DIR ${PROJECT_SOURCE_DIR})
+set (PROJECT_LIB_DIR ${PROJECT_DIR}/lib)
+set (PROJECT_INC_DIR ${PROJECT_DIR}/include)
+
 set (PROJECT_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 
 add_subdirectory(${PROJECT_SOURCE_DIR})

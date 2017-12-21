@@ -40,3 +40,13 @@ MainPresenter::~MainPresenter() {
 	// TODO Auto-generated destructor stub
 }
 
+
+void MainPresenter::run(){
+
+}
+
+
+#include "moc_MainPresenter.cpp"
+
+
+

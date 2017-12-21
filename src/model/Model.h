@@ -8,7 +8,7 @@
 #ifndef SRC_MODEL_MODEL_H_
 #define SRC_MODEL_MODEL_H_
 
-#include <observer/subject.h>
+#include "observer/Subject.h"
 
 
 class Model : public Subject{
