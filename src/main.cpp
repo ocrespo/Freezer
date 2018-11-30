@@ -7,7 +7,7 @@
 
 #include <QApplication>
 
-#include "model/Model.cpp"
+#include "model/Model.h"
 #include "presenter/MainPresenter.h"
 #include "view/MainWindow.h"
 
