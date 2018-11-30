@@ -1,4 +1,4 @@
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/observer)
+#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/observer)
 
 
 set (Model_SOURCES ${Model_SOURCES} 
@@ -6,5 +6,11 @@ set (Model_SOURCES ${Model_SOURCES}
 
 
 add_library(model STATIC ${Model_SOURCES}  
-						$<TARGET_OBJECTS:observer>
 						)
+
+						
+#set (Observer_SOURCES ${Observer_SOURCES} 
+ #                     	${CMAKE_CURRENT_SOURCE_DIR}/Subject.cpp
+ #                       ) #Add .cpp here
+
+#add_library(observer OBJECT ${Observer_SOURCES})

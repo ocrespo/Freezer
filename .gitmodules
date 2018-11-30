@@ -1,3 +1,6 @@
 [submodule "dependencies"]
 	path = dependencies
 	url = git@github.com:ocrespo/OCUtils.git
+[submodule "dependencies/OCUtils"]
+	path = dependencies/OCUtils
+	url = git@github.com:ocrespo/OCUtils.git

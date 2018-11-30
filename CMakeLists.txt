@@ -62,6 +62,9 @@ find_package(Qt5Widgets REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
+set(OCUtils ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/OCUtils/src)
+include_directories(${OCUtils})
+
 
 set (PROJECT_DIR ${PROJECT_SOURCE_DIR})
 set (PROJECT_LIB_DIR ${PROJECT_DIR}/lib)
