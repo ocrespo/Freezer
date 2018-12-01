@@ -15,9 +15,3 @@ Model::Model() {
 Model::~Model() {
 	// TODO Auto-generated destructor stub
 }
-
-void Model::startTest(std::string input_file, std::string output_file){
-	//Doing test
-
-
-}

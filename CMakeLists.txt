@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 
-# Force C++11
-set (CMAKE_CXX_STANDARD 11)
+# Force C++17
+set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_CXX_EXTENSIONS OFF)
 
@@ -47,7 +47,8 @@ configure_file (
   "${PROJECT_SOURCE_DIR}/FreezerConfig.h.in"
   "${PROJECT_BINARY_DIR}/FreezerConfig.h"
   )
-  
+        
+
   
 # add the binary tree to the search path for include files
 include_directories("${PROJECT_BINARY_DIR}")
@@ -58,9 +59,14 @@ set (CMAKE_INCLUDE_CURRENT_DIR ON)
 set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTOUIC ON)  
 
-find_package(Qt5Widgets REQUIRED)
+# Search dependencies
 
+find_package(Qt5Widgets REQUIRED)
+find_package(Boost 1.68.0 EXACT REQUIRED)    
+  
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+include_directories(${Boost_INCLUDE_DIR})
 
 set(OCUtils ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/OCUtils/src)
 include_directories(${OCUtils})

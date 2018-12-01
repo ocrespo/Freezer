@@ -18,7 +18,6 @@ public:
 	Model();
 	virtual ~Model();
 
-	void startTest(std::string input_file, std::string output_file);
 
 };
 
