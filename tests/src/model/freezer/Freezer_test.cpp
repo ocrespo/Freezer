@@ -5,10 +5,12 @@
  *      Author: Oscar Crespo
  */
 
+#include <fstream>
 
 #include <gtest/gtest.h>
 
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
 
 #include <model/freezer/Freezer.h>
 #include <events/EventStore.h>
@@ -21,6 +23,17 @@ public:
 
 
 protected:
+
+	  void SetUp() override {
+		freezer.addItem(0,"A","B");
+		freezer.addItem(0,"B","B");
+		freezer.addItem(0,"C","B");
+		freezer.addItem(0,"D","B");
+		freezer.addItem(0,"E","B");
+	}
+
+	freezer::Freezer freezer;
+
 
 private:
 
@@ -48,12 +61,6 @@ TEST_F(FreezerTest, addItem) {
 }
 
 TEST_F(FreezerTest, removeItem) {
-	freezer::Freezer freezer;
-	freezer.addItem(0,"A","B");
-	freezer.addItem(0,"B","B");
-	freezer.addItem(0,"C","B");
-	freezer.addItem(0,"D","B");
-	freezer.addItem(0,"E","B");
 
 	EXPECT_EQ(freezer.removeItem(5), false);
 
@@ -83,13 +90,6 @@ TEST_F(FreezerTest, removeItem) {
 
 
 TEST_F(FreezerTest, editItem) {
-	freezer::Freezer freezer;
-	freezer.addItem(0,"A","B");
-	freezer.addItem(0,"B","B");
-	freezer.addItem(0,"C","B");
-	freezer.addItem(0,"D","B");
-	freezer.addItem(0,"E","B");
-
 	EXPECT_EQ(freezer.getItem(0).getName(), "A");
 
 	freezer.editItem(0,"AA","AAA");
@@ -97,24 +97,28 @@ TEST_F(FreezerTest, editItem) {
 
 }
 
-TEST_F(FreezerTest, save) {
-	freezer::Freezer freezer;
-	freezer.addItem(0,"A","B");
-	freezer.addItem(0,"B","B");
-	freezer.addItem(0,"C","B");
-	freezer.addItem(0,"D","B");
-	freezer.addItem(0,"E","B");
+TEST_F(FreezerTest, serilizationSave) {
+	//std::stringstream ss;
+    std::ofstream ofs("test.xml");
 
-	std::stringstream ss;
-
-	boost::archive::xml_oarchive oarch(ss);
+	boost::archive::xml_oarchive oarch(ofs);
 	oarch << BOOST_SERIALIZATION_NVP(freezer);
-	//boost::archive::text_iarchive iarch(ss);
-	//iarch >> out;
-	std::cout << ss.str() << std::endl;
-
 }
+TEST_F(FreezerTest, serilizationLoad) {
 
+	freezer::Freezer freezer2;
+
+	std::ifstream ifs("test.xml");
+
+	boost::archive::xml_iarchive iarch(ifs);
+	iarch >> BOOST_SERIALIZATION_NVP(freezer2);
+
+	EXPECT_EQ(freezer2.getItem(0).getName(), freezer.getItem(0).getName());
+	EXPECT_EQ(freezer2.getItem(1).getName(), freezer.getItem(1).getName());
+	EXPECT_EQ(freezer2.getItem(2).getName(), freezer.getItem(2).getName());
+	EXPECT_EQ(freezer2.getItem(3).getName(), freezer.getItem(3).getName());
+	EXPECT_EQ(freezer2.getItem(4).getName(), freezer.getItem(4).getName());
+}
 
 
 

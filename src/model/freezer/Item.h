@@ -17,6 +17,7 @@ namespace freezer {
 
 class Item {
 public:
+	Item();
 	Item(int id, int drawer, const std::string& name, const std::string& description = "");
 	virtual ~Item();
 
@@ -30,6 +31,8 @@ public:
 
 	inline std::string getDescription()const {return description;}
 	inline void setDescription(const std::string& description){ this->description = description;}
+
+	inline boost::gregorian::date getDate()const {return date;}
 
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version){

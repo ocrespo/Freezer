@@ -9,6 +9,14 @@
 
 namespace freezer {
 
+Item::Item():
+	id(0),
+	drawer(0),
+	date(boost::gregorian::day_clock::universal_day())
+{
+
+}
+
 Item::Item(int id, int drawer, const std::string& name, const std::string& description):
 		id(id),
 		drawer(drawer),
