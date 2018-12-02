@@ -25,6 +25,7 @@ add_executable(${PROJECT_NAME}  ${Freezer_SOURCES} ${Freezer_RESOURCES})
 
 target_link_libraries(${PROJECT_NAME}  Qt5::Widgets)
 target_link_libraries(${PROJECT_NAME}  ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}  ${CMAKE_THREAD_LIBS_INIT})
 
 add_test(${PROJECT_NAME} FreezerTest)
  

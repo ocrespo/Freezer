@@ -90,7 +90,7 @@ TEST_F(FreezerTest, removeItem) {
 TEST_F(FreezerTest, editItem) {
 	EXPECT_EQ(freezer.getItem(0).getName(), "A");
 
-	freezer.editItem(0,"AA","AAA");
+	freezer.editItem(0,1,"AA","AAA");
 	EXPECT_EQ(freezer.getItem(0).getName(), "AA");
 
 }

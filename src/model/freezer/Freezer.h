@@ -27,11 +27,11 @@ public:
 	inline void setNumDrawer(int drawers){num_drawer = drawers;}
 	inline int getNumDrawer()const{return num_drawer;}
 
-	void addItem(int drawer, const std::string& name, const std::string& description);
+	int addItem(int drawer, const std::string& name, const std::string& description);
 
 	bool moveItem(int key, int drawer);
 
-	bool editItem(int key, const std::string& name, const std::string& description);
+	bool editItem(int key, int drawer, const std::string& name, const std::string& description);
 
 	bool removeItem(int key);
 

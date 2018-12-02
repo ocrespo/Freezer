@@ -65,14 +65,16 @@ set (CMAKE_AUTOUIC ON)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Boost 1.68.0 COMPONENTS filesystem serialization date_time REQUIRED)    
-
+find_package( Threads )
   
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(${Boost_INCLUDE_DIR})
 
-set(OCUtils ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/OCUtils/src)
-include_directories(${OCUtils})
+set(OCUtils ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/OCUtils)
+include_directories(${OCUtils}/src)
+include_directories(${OCUtils}/include)
+
 
 
 set (PROJECT_DIR ${PROJECT_SOURCE_DIR})

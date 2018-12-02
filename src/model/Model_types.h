@@ -9,8 +9,12 @@
 #define SRC_MODEL_MODEL_TYPES_H_
 
 enum class EModelEvents{
-	Init,
-
+	NextId,
+	NumDrawers,
+	AddedItem,
+	RemovedItem,
+	ItemInfo,
+	UpdatedItem,
 
 	Max
 };

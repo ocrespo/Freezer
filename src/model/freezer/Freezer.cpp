@@ -11,7 +11,7 @@ namespace freezer {
 
 Freezer::Freezer() :
 		next_id(0),
-		num_drawer(0)
+		num_drawer(3)
 {
 
 }
@@ -20,10 +20,12 @@ Freezer::~Freezer() {
 
 }
 
-void Freezer::addItem(int drawer, const std::string& name, const std::string& description){
+int Freezer::addItem(int drawer, const std::string& name, const std::string& description){
+	int ret{next_id};
 	content.emplace(next_id,Item(next_id,drawer,name,description));
 	next_id = findNextId();
 
+	return ret;
 }
 
 bool Freezer::moveItem(int key, int drawer){
@@ -36,12 +38,13 @@ bool Freezer::moveItem(int key, int drawer){
 	return ret;
 }
 
-bool Freezer::editItem(int key, const std::string& name, const std::string& description){
+bool Freezer::editItem(int key,  int drawer, const std::string& name, const std::string& description){
 	bool ret{false};
 	auto item{content.find(key)};
 	if(item != content.cend()){
 		item->second.setName(name);
 		item->second.setDescription(description);
+        item->second.setDrawer(drawer);
 		ret = true;
 	}
 	return ret;

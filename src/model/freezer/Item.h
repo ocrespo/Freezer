@@ -33,6 +33,8 @@ public:
 	inline void setDescription(const std::string& description){ this->description = description;}
 
 	inline boost::gregorian::date getDate()const {return date;}
+	inline std::string getStringDate()const {return boost::gregorian::to_sql_string(date);}
+
 
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version){

@@ -15,16 +15,59 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    /*ui->progressBar->hide();
+    QObject::connect(ui->removeButton,
+            &QPushButton::clicked,
+            this,
+            [&](){buttonDeleteClicked(ui->treeWidget->currentItem()->text(0));}
+    );
+    QObject::connect(ui->addButton,SIGNAL(clicked()),this,SIGNAL(buttonAddedClicked()));
 
-    QObject::connect(ui->ButtonStart,SIGNAL(clicked()),this,SIGNAL(ButtonStartClicked()));
-    QObject::connect(ui->FileInputFile,SIGNAL(clicked()),this,SIGNAL(InputFileClicked()));
+    QObject::connect(ui->treeWidget,
+                &QTreeWidget::itemDoubleClicked,
+                this,
+                [&](){itemSelected(ui->treeWidget->currentItem()->text(0));}
+    );
 
-    QObject::connect(ui->FileOutputFile,SIGNAL(clicked()),this,SIGNAL(OutputFileClicked()));*/
+    QObject::connect(ui->treeWidget,
+                &QTreeWidget::itemEntered,
+                this,
+                [&](){itemSelected(ui->treeWidget->currentItem()->text(0));}
+    );
+
+    ui->treeWidget->setSortingEnabled(true);
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::addItem(int id,int drawer, const QString& name, const QString& description, const QString& date){
+    ui->treeWidget->setSortingEnabled(false);
+
+    QTreeWidgetItem * item = new QTreeWidgetItem();
+    item->setText(0,QString::number(id));
+    item->setText(1,QString::number(drawer));
+    item->setText(2,name);
+    item->setText(3,description);
+    item->setText(4,date);
+
+	ui->treeWidget->addTopLevelItem(item);
+
+	items[id] = item;
+
+    ui->treeWidget->setSortingEnabled(true);
+}
+
+void MainWindow::removeItem(int id){
+    ui->treeWidget->setSortingEnabled(false);
+    ui->treeWidget->takeTopLevelItem(ui->treeWidget->indexOfTopLevelItem(items[id]));
+    ui->treeWidget->setSortingEnabled(true);
+}
+
+void MainWindow::updateItem(int id,int drawer, const QString& name, const QString& description){
+    items[id]->setText(1,QString::number(drawer));
+    items[id]->setText(2,name);
+    items[id]->setText(3,description);
 }
 
 
