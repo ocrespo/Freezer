@@ -84,8 +84,6 @@ TEST_F(FreezerTest, removeItem) {
 	EXPECT_EQ(items[0].getName(), "B");
 	EXPECT_EQ(items[1].getId(), 3);
 	EXPECT_EQ(items[1].getName(), "D");
-
-
 }
 
 

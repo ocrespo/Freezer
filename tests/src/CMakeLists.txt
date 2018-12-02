@@ -4,7 +4,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/model)
 
 
 add_executable(FreezerTest ${FreezerTest_SOURCES})
-add_executable(FreezerTest2 ${FreezerTest_SOURCES})
 
 
 find_package( Threads )
@@ -20,13 +19,6 @@ target_link_libraries(FreezerTest $<TARGET_OBJECTS:model>
                               	gtest
                               	${Boost_LIBRARIES}
                                	)                               	
-                               	
-                               	target_link_libraries(FreezerTest2 $<TARGET_OBJECTS:model>
-								${CMAKE_THREAD_LIBS_INIT} 
-								gmock
-                              	gtest
-                              	${Boost_LIBRARIES}
-                               	)
 
 add_test(${PROJECT_NAME}  FreezerTest)
 
