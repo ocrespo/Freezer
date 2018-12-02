@@ -11,6 +11,7 @@
 #include <string>
 
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/gregorian/greg_serialize.hpp>
 
 namespace freezer {
 
@@ -30,8 +31,17 @@ public:
 	inline std::string getDescription()const {return description;}
 	inline void setDescription(const std::string& description){ this->description = description;}
 
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version){
+        ar & BOOST_SERIALIZATION_NVP(id);
+        ar & BOOST_SERIALIZATION_NVP(drawer);
+        ar & BOOST_SERIALIZATION_NVP(name);
+        ar & BOOST_SERIALIZATION_NVP(description);
+        ar & BOOST_SERIALIZATION_NVP(date);
+    }
 
 protected:
+
 
 	int id;
 	int drawer;

@@ -20,6 +20,5 @@ int main(int argc, char *argv[])
     MainPresenter presenter(&w, &model);
 
     w.show();
-
     return a.exec();
 }

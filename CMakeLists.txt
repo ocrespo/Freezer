@@ -32,9 +32,11 @@ endif()
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-    	set(compilation "-g")
+    	set(compilation "-g -O0")
+    else()
+    	set(compilation "-O2")
     endif()
-    set(compilation "-O2 ${compilation}")
+    set(compilation "${compilation}")
 endif()
 
 set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} ${warnings} ${compilation}")
@@ -62,7 +64,8 @@ set (CMAKE_AUTOUIC ON)
 # Search dependencies
 
 find_package(Qt5Widgets REQUIRED)
-find_package(Boost 1.68.0 EXACT REQUIRED)    
+find_package(Boost 1.68.0 COMPONENTS filesystem serialization date_time REQUIRED)    
+
   
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -74,11 +77,17 @@ include_directories(${OCUtils})
 
 set (PROJECT_DIR ${PROJECT_SOURCE_DIR})
 set (PROJECT_LIB_DIR ${PROJECT_DIR}/lib)
-set (PROJECT_INC_DIR ${PROJECT_DIR}/include)
+set (PROJECT_INCLUDE_DIR ${PROJECT_DIR}/include)
 
+link_directories(${PROJECT_LIB_DIR})
+
+set (PROJECT_TEST_DIR ${PROJECT_SOURCE_DIR}/tests)
 set (PROJECT_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 
+
 add_subdirectory(${PROJECT_SOURCE_DIR})
+
+add_subdirectory(${PROJECT_TEST_DIR})
 
 
 

@@ -8,8 +8,10 @@
 #ifndef SRC_MODEL_FREEZER_FREEZER_H_
 #define SRC_MODEL_FREEZER_FREEZER_H_
 
-#include <unordered_map>
+#include <map>
 #include <vector>
+
+#include <boost/serialization/map.hpp>
 
 #include "Item.h"
 
@@ -20,24 +22,35 @@ public:
 	Freezer();
 	virtual ~Freezer();
 
+	inline int getNextId()const{return next_id;}
+
+	inline void setNumDrawer(int drawers){num_drawer = drawers;}
+	inline int getNumDrawer()const{return num_drawer;}
+
 	void addItem(int drawer, const std::string& name, const std::string& description);
 
-	void moveItem(int key, int drawer);
+	bool moveItem(int key, int drawer);
 
-	void editItem(int key, const std::string& name, const std::string& description);
+	bool editItem(int key, const std::string& name, const std::string& description);
 
-	void removeItem(int key);
+	bool removeItem(int key);
 
+	Item getItem(int key);
 	std::vector<Item> getItems();
+
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version){
+        //ar & boost::serialization::make_nvp("version",version);
+        ar & BOOST_SERIALIZATION_NVP(num_drawer);
+        ar & BOOST_SERIALIZATION_NVP(next_id);
+        ar & BOOST_SERIALIZATION_NVP(freezer);
+    }
 
 protected:
 
 	int findNextId();
 
-	void save();
-	void load();
-
-	std::unordered_map<int,Item> freezer;
+	std::map<int,Item> freezer;
 	int next_id;
 
 	int num_drawer;
