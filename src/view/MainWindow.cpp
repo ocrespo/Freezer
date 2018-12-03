@@ -61,6 +61,7 @@ void MainWindow::addItem(int id,int drawer, const QString& name, const QString& 
 void MainWindow::removeItem(int id){
     ui->treeWidget->setSortingEnabled(false);
     ui->treeWidget->takeTopLevelItem(ui->treeWidget->indexOfTopLevelItem(items[id]));
+    delete items.take(id);
     ui->treeWidget->setSortingEnabled(true);
 }
 
