@@ -14,31 +14,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+}
 
+MainWindow::~MainWindow() {
+    delete ui;
+}
+
+void MainWindow::initCallbacks(){
     QObject::connect(ui->removeButton,
-            &QPushButton::clicked,
-            this,
-            [&](){buttonDeleteClicked(ui->treeWidget->currentItem()->text(0));}
+                &QPushButton::clicked,
+                this,
+                [&](){buttonDeleteClicked(ui->treeWidget->currentItem()->text(0));}
     );
     QObject::connect(ui->addButton,SIGNAL(clicked()),this,SIGNAL(buttonAddedClicked()));
 
     QObject::connect(ui->treeWidget,
                 &QTreeWidget::itemDoubleClicked,
                 this,
-                [&](){itemSelected(ui->treeWidget->currentItem()->text(0));}
-    );
-
-    QObject::connect(ui->treeWidget,
-                &QTreeWidget::itemEntered,
-                this,
-                [&](){itemSelected(ui->treeWidget->currentItem()->text(0));}
+                [&](){if(ui->treeWidget->currentItem()) itemSelected(ui->treeWidget->currentItem()->text(0));}
     );
 
     ui->treeWidget->setSortingEnabled(true);
-}
-
-MainWindow::~MainWindow() {
-    delete ui;
+    ui->treeWidget->sortByColumn(4,Qt::AscendingOrder);
 }
 
 void MainWindow::addItem(int id,int drawer, const QString& name, const QString& description, const QString& date){

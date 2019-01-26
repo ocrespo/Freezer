@@ -27,6 +27,8 @@ MainPresenter::MainPresenter(MainWindow *view,Model *model) :
 	model->registerUpdateProgression( std::bind( &MainPresenter::updateProgression, this, std::placeholders::_1 ) );
 	model->registerUpdateEndProcess ( std::bind( &MainPresenter::updateFinishProgression, this) );*/
 
+    model->registerInitFinished(std::bind( &MainPresenter::initFinished_callback, this));
+
 	model->registerNextId(std::bind( &MainPresenter::setNextId_callback, this, std::placeholders::_1 ));
 	model->registerNumDrawers(std::bind( &MainPresenter::setNumDrawer_callback, this, std::placeholders::_1 ));
 	model->registerItemAdded(std::bind( &MainPresenter::itemAdded_callback,
@@ -202,6 +204,13 @@ Q_INVOKABLE void MainPresenter::itemUpdated(int id,
     mainView->updateItem(id,drawer,name,description);
 }
 
+void MainPresenter::initFinished_callback(){
+    QMetaObject::invokeMethod(this,"initFinished",Qt::QueuedConnection);
+}
+
+Q_INVOKABLE void MainPresenter::initFinished(){
+    mainView->initCallbacks();
+}
 
 
 #include "moc_MainPresenter.cpp"

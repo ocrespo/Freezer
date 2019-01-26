@@ -23,6 +23,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
 	virtual ~MainWindow();
 
+	void initCallbacks();
+
 	void addItem(int id,int drawer, const QString& name, const QString& description, const QString& date);
 
 	void removeItem(int id);

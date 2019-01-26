@@ -52,6 +52,11 @@ void Model::registerItemUpdated(const UpdatedItem_callback_t& callback){
     addObserver(EModelEvents::UpdatedItem,new  ocutils::EventUniq(callback));
 }
 
+void Model::registerInitFinished(const Void_callback_t& callback){
+    addObserver(EModelEvents::InitFinished,new  ocutils::EventUniq(callback));
+}
+
+
 
 
 void Model::requestInitialInfo(){
@@ -72,6 +77,7 @@ void Model::requestInitialInfo(){
 							it->getDescription(),
 							it->getStringDate());
 	}
+    donotify<ocutils::EventUniq>(EModelEvents::InitFinished);
 }
 
 void Model::addItem(int drawer,const std::string& name, const std::string& description){

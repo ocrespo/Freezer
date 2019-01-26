@@ -11,6 +11,7 @@
 #include <string>
 #include <functional>
 
+using Void_callback_t = std::function<void()>;
 using Int_callback_t = std::function<void(int)>;
 using AddedItem_callback_t = std::function<void(int,int,const std::string&, const std::string&, const std::string&)>;
 using UpdatedItem_callback_t = std::function<void(int,int,const std::string&, const std::string&)>;

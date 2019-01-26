@@ -29,6 +29,7 @@ public:
 	void registerNumDrawers(const Int_callback_t& callback);
     void registerItemInfo(const AddedItem_callback_t& callback);
     void registerItemUpdated(const UpdatedItem_callback_t& callback);
+    void registerInitFinished(const Void_callback_t& callback);
 
 
 	void requestInitialInfo();

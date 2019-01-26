@@ -70,6 +70,9 @@ private:
                             const QString& name,
                             const QString& description);
 
+    void initFinished_callback();
+    Q_INVOKABLE void initFinished();
+
 
 
 

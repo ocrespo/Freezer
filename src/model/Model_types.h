@@ -15,6 +15,7 @@ enum class EModelEvents{
 	RemovedItem,
 	ItemInfo,
 	UpdatedItem,
+	InitFinished,
 
 	Max
 };
