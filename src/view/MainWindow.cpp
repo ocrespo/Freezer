@@ -24,7 +24,7 @@ void MainWindow::initCallbacks(){
     QObject::connect(ui->removeButton,
                 &QPushButton::clicked,
                 this,
-                [&](){buttonDeleteClicked(ui->treeWidget->currentItem()->text(0));}
+                [&](){if(ui->treeWidget->currentItem()) buttonDeleteClicked(ui->treeWidget->currentItem()->text(0));}
     );
     QObject::connect(ui->addButton,SIGNAL(clicked()),this,SIGNAL(buttonAddedClicked()));
 
