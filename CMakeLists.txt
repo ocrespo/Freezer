@@ -64,7 +64,7 @@ set (CMAKE_AUTOUIC ON)
 # Search dependencies
 
 find_package(Qt5Widgets REQUIRED)
-find_package(Boost 1.68.0 COMPONENTS filesystem serialization date_time REQUIRED)    
+find_package(Boost 1.36.0 REQUIRED COMPONENTS filesystem serialization date_time )    
 find_package( Threads )
   
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

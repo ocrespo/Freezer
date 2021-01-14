@@ -12,6 +12,7 @@
 
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/gregorian/greg_serialize.hpp>
+#include <boost/serialization/nvp.hpp>
 
 namespace freezer {
 
